@@ -79,7 +79,7 @@ const Features: React.FC = () => {
             <div className="absolute -left-10 -bottom-10 w-64 h-64 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-all duration-700 max-w-lg w-full">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcI48MHqtczX7xi8wj8yIm7aDV0husmLth10O7xJnSk76yghaWiZKVbC-1rYJIxQ02JKB2SC5_PpHxFpuBUb5Hej37J4LLZvrKJDW8iz-VsumMUVLAFe4jsBIl71ikjLMQZ_28a6876KmSo_-GHIUGJoCnA9XxmcGv4Ewy2-FHVwUkijI0pM7BxOwUKrm3tD1SKjMFBDcG_brnccftD0vwlm2_rktBmGkmAPRufjJpWR4swEWubaiU2X69JQaRiTn43w0rPog0OJwB"
+                src="https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=1000&auto=format&fit=crop"
                 alt="Clean modern living room"
                 className="w-full h-auto object-cover"
               />

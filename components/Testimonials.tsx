@@ -40,7 +40,7 @@ const Testimonials: React.FC = () => {
             <div className="flex items-center gap-4 border-t border-sand pt-6">
               <div className="size-12 rounded-full overflow-hidden">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi32XDSAdteAq9l5UFP6ztqPltvX9U3bmAv7wKFPScvTy0fR6iHhfuu1EtIh8uCaYbl-AEQe2DKmg0OMkd3AMMZlBij9Enn0TLk8ApLht6mXxoP_imt7hJOFTWu9-5SoPR-taAeyxkACsuzOT-rGGP5xlE4qTeMePffGpUwbRD23dHwDBV--WjDBuLyUYRmF-89p9-gv_J4J2n3vjlRvp2_HjyX2rOuWeKKa1ID7if3hJbJHsNEOP8EzVaIZc2wGQfTM8JZzBP4o-p"
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&auto=format&fit=crop"
                   alt="Sarah J."
                   className="w-full h-full object-cover"
                 />
@@ -78,7 +78,7 @@ const Testimonials: React.FC = () => {
             <div className="flex items-center gap-4 border-t border-primary/10 pt-6">
               <div className="size-12 rounded-full overflow-hidden">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAutD63ObZsgZgwJLAWlkv6_ikVn7YY72xSUiIiQDzKth0CKAbAVMOvpsiHKTiCEuGMYNDIh7Na3pMtMtx-e0hNBA9zCM4KD82pg6DIvoPyVJOkD5eNRT8abAVGz7iORAwsHTevQtpldODXKd_PuBXiovBI9M-NXqREHbDrWHhzZJvQk1L7aiqIrq1v6cHDIC3dTTHW0jWJbRkGDUodR3uMVlbExgTqYQ-Jm2d1XiMG1RGtzRKQqi2dTCsWEeo_sqTpGu8Sri1099vq"
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop"
                   alt="Michael T."
                   className="w-full h-full object-cover"
                 />
@@ -116,7 +116,7 @@ const Testimonials: React.FC = () => {
             <div className="flex items-center gap-4 border-t border-secondary/10 pt-6">
               <div className="size-12 rounded-full overflow-hidden">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuClZK0ht2OOPHkpI_Z6uNo_5so5sM8oF0SKdpE3vSPK0dUHxe3L-IzMtjWPcfsS2R3HnTR4t5EWo0g5GOrW6llZYpERfjKl9uPAZX_V8vgUjfBotIR7ZlRWbDygT-37AzK_UTndMHH_yrEfFHQRoWzDQOMZmDXdEFhL6LthS0xRIS9nqkHtMYqMvVLbx9YfkKFwCEpheZGAm27_-3yTSBdirwMiH1m_8s8S8_GFscPkTYaweewpMbvcTgq637R1vmmbg275-IvE3DVn"
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop"
                   alt="Emily R."
                   className="w-full h-full object-cover"
                 />

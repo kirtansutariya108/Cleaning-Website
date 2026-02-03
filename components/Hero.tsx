@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
               <div className="absolute inset-0 bg-secondary/10 rounded-[3rem] -rotate-3 scale-95 -z-10"></div>
               <div className="rounded-[3rem] overflow-hidden shadow-2xl shadow-primary/10 bg-white">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZlBjXKQfDHpgxMSXXeK1bsSGYbV6diPqTBRvDBscOfU5BCLsLUixYxK2Io6Shr08o8gVmO-N2Y5hShPQwo2yhGs3GlJPa6vcMRI2bwrfORBEWItXyzsDPduXhJFmuw1XvYu86zyQrHCXUQmSmIHGHWvd2YqMlePt0Ghxy6Ib2iOgQAnzkNHicEqG6kmp3k9ME9b_VcN3w5gR3--6mwaCWAw9BRoj2j9n3fmSBtXPcF_B_rE9_xfTOe6EUeV_RrvB2m0M3Zb-Ag7FP"
+                  src="https://images.unsplash.com/photo-1581578731117-104f2a412727?q=80&w=1000&auto=format&fit=crop"
                   alt="Friendly professional cleaner smiling"
                   className="w-full h-full object-cover aspect-[4/5]"
                 />
