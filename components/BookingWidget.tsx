@@ -79,7 +79,12 @@ const BookingWidget: React.FC = () => {
            d1.getFullYear() === d2.getFullYear();
   };
 
-  const currentMonthYear = selectedDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+  const isToday = (d: Date) => {
+    const today = new Date();
+    return d.getDate() === today.getDate() && 
+           d.getMonth() === today.getMonth() && 
+           d.getFullYear() === today.getFullYear();
+  };
 
   if (bookingComplete) {
       return (
@@ -174,7 +179,7 @@ const BookingWidget: React.FC = () => {
                 </div>
 
                 {/* Date Selection */}
-                <div className="flex-1 space-y-4">
+                <div className="flex-1 space-y-4 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="size-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
                       2
@@ -183,46 +188,40 @@ const BookingWidget: React.FC = () => {
                       Select Date
                     </span>
                   </div>
-                  <div className="bg-sand/30 rounded-2xl p-4 border border-sand/50">
-                    <div className="flex justify-between items-center mb-4 px-1">
-                      <span className="font-bold text-sm">{currentMonthYear}</span>
-                      <div className="flex gap-2">
-                        <span className="material-symbols-outlined text-sm cursor-pointer hover:text-primary text-gray-400">
-                          chevron_left
-                        </span>
-                        <span className="material-symbols-outlined text-sm cursor-pointer hover:text-primary text-gray-400">
-                          chevron_right
-                        </span>
-                      </div>
+                  
+                  {/* Horizontal Date Picker */}
+                  <div className="relative">
+                    <div className="flex gap-3 overflow-x-auto pb-4 pt-1 snap-x scrollbar-hide">
+                        {dates.map(d => {
+                            const selected = isSameDay(selectedDate, d);
+                            return (
+                                <button
+                                    key={d.toISOString()}
+                                    onClick={() => setSelectedDate(d)}
+                                    className={`flex-shrink-0 snap-start flex flex-col items-center justify-center w-16 h-20 rounded-2xl border transition-all duration-200 ${
+                                        selected 
+                                        ? 'bg-primary border-primary text-white shadow-lg shadow-primary/25 scale-105'
+                                        : 'bg-white border-sand hover:border-primary/50 text-text-main hover:bg-sand/30'
+                                    }`}
+                                >
+                                    <span className={`text-xs font-bold uppercase tracking-wide mb-1 ${selected ? 'text-white/90' : 'text-text-light'}`}>
+                                        {isToday(d) ? 'Tdy' : d.toLocaleDateString('en-US', { weekday: 'short' })}
+                                    </span>
+                                    <span className={`text-xl font-bold ${selected ? 'text-white' : 'text-text-main'}`}>
+                                        {d.getDate()}
+                                    </span>
+                                </button>
+                            )
+                        })}
                     </div>
-                    <div className="custom-calendar-grid text-[10px] text-center mb-2 font-bold text-text-light uppercase tracking-tighter">
-                      <span>Su</span>
-                      <span>Mo</span>
-                      <span>Tu</span>
-                      <span>We</span>
-                      <span>Th</span>
-                      <span>Fr</span>
-                      <span>Sa</span>
-                    </div>
-                    <div className="custom-calendar-grid text-sm">
-                        {Array.from({ length: dates[0]?.getDay() || 0 }).map((_, i) => (
-                           <span key={`pad-${i}`} className="py-1"></span>
-                        ))}
-                        
-                        {dates.map(d => (
-                            <button
-                            key={d.toISOString()}
-                            onClick={() => setSelectedDate(d)}
-                            className={`py-1.5 rounded-lg transition-colors text-xs sm:text-sm ${
-                                isSameDay(selectedDate, d) 
-                                ? 'bg-primary text-white shadow-sm'
-                                : 'hover:bg-primary/10 text-text-main'
-                            }`}
-                            >
-                            {d.getDate()}
-                            </button>
-                        ))}
-                    </div>
+                    {/* Fade overlay to indicate scroll */}
+                    <div className="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-text-main">
+                        Selected: <span className="font-bold text-primary">{selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
+                    </p>
                   </div>
                 </div>
 
