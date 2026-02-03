@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 type ServiceType = 'standard' | 'deep' | 'movein';
 type TimeSlot = '09:00' | '11:30' | '13:00' | '15:30';
 
 const BookingWidget: React.FC = () => {
   const [service, setService] = useState<ServiceType>('standard');
-  const [selectedDate, setSelectedDate] = useState<number>(7);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<TimeSlot>('09:00');
+  const [dates, setDates] = useState<Date[]>([]);
   
   // Form State
   const [name, setName] = useState('');
@@ -14,7 +15,16 @@ const BookingWidget: React.FC = () => {
   const [status, setStatus] = useState<'IDLE' | 'SUBMITTING' | 'ERROR'>('IDLE');
   const [bookingComplete, setBookingComplete] = useState(false);
 
-  const days = Array.from({ length: 14 }, (_, i) => i + 1); // Mock days 1-14
+  useEffect(() => {
+    const today = new Date();
+    const nextDays = Array.from({ length: 14 }, (_, i) => {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+      return d;
+    });
+    setDates(nextDays);
+    setSelectedDate(nextDays[0]);
+  }, []);
 
   const handleBooking = async () => {
     if (!name || !phone) {
@@ -24,9 +34,11 @@ const BookingWidget: React.FC = () => {
 
     setStatus('SUBMITTING');
 
+    const formattedDate = selectedDate.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
+    
     const formData = new FormData();
     formData.append('service', service);
-    formData.append('date', `October ${selectedDate}, 2024`);
+    formData.append('date', formattedDate);
     formData.append('time', selectedTime);
     formData.append('name', name);
     formData.append('phone', phone);
@@ -57,7 +69,17 @@ const BookingWidget: React.FC = () => {
       setName('');
       setPhone('');
       setStatus('IDLE');
+      const today = new Date();
+      setSelectedDate(today);
   };
+
+  const isSameDay = (d1: Date, d2: Date) => {
+    return d1.getDate() === d2.getDate() && 
+           d1.getMonth() === d2.getMonth() && 
+           d1.getFullYear() === d2.getFullYear();
+  };
+
+  const currentMonthYear = selectedDate.toLocaleString('default', { month: 'long', year: 'numeric' });
 
   if (bookingComplete) {
       return (
@@ -68,7 +90,9 @@ const BookingWidget: React.FC = () => {
                         <span className="material-symbols-outlined text-4xl">check_circle</span>
                     </div>
                     <h3 className="text-3xl font-bold text-text-main">Booking Confirmed!</h3>
-                    <p className="text-text-light max-w-md">We've received your request for a {service} clean on October {selectedDate} at {selectedTime}. You will receive a confirmation email shortly.</p>
+                    <p className="text-text-light max-w-md">
+                      We've received your request for a {service === 'standard' ? 'Standard Clean' : service === 'deep' ? 'Deep Clean' : 'Move-in Clean'} on {selectedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} at {selectedTime}. You will receive a confirmation email shortly.
+                    </p>
                     <button 
                         onClick={resetBooking}
                         className="mt-4 px-8 py-3 bg-secondary text-white rounded-xl font-bold hover:bg-secondary/90 transition-colors"
@@ -161,12 +185,12 @@ const BookingWidget: React.FC = () => {
                   </div>
                   <div className="bg-sand/30 rounded-2xl p-4 border border-sand/50">
                     <div className="flex justify-between items-center mb-4 px-1">
-                      <span className="font-bold text-sm">October 2024</span>
+                      <span className="font-bold text-sm">{currentMonthYear}</span>
                       <div className="flex gap-2">
-                        <span className="material-symbols-outlined text-sm cursor-pointer hover:text-primary">
+                        <span className="material-symbols-outlined text-sm cursor-pointer hover:text-primary text-gray-400">
                           chevron_left
                         </span>
-                        <span className="material-symbols-outlined text-sm cursor-pointer hover:text-primary">
+                        <span className="material-symbols-outlined text-sm cursor-pointer hover:text-primary text-gray-400">
                           chevron_right
                         </span>
                       </div>
@@ -181,20 +205,21 @@ const BookingWidget: React.FC = () => {
                       <span>Sa</span>
                     </div>
                     <div className="custom-calendar-grid text-sm">
-                        {/* Mock past days */}
-                        <span className="py-1 text-text-light/30">29</span>
-                        <span className="py-1 text-text-light/30">30</span>
-                        {days.map(d => (
+                        {Array.from({ length: dates[0]?.getDay() || 0 }).map((_, i) => (
+                           <span key={`pad-${i}`} className="py-1"></span>
+                        ))}
+                        
+                        {dates.map(d => (
                             <button
-                            key={d}
+                            key={d.toISOString()}
                             onClick={() => setSelectedDate(d)}
-                            className={`py-1.5 rounded-lg transition-colors ${
-                                selectedDate === d 
+                            className={`py-1.5 rounded-lg transition-colors text-xs sm:text-sm ${
+                                isSameDay(selectedDate, d) 
                                 ? 'bg-primary text-white shadow-sm'
                                 : 'hover:bg-primary/10 text-text-main'
                             }`}
                             >
-                            {d}
+                            {d.getDate()}
                             </button>
                         ))}
                     </div>
